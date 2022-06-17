@@ -5,8 +5,12 @@ import static edu.aku.hassannaqvi.tpvicsshrucround2listing.core.MainApp.listings
 import static edu.aku.hassannaqvi.tpvicsshrucround2listing.core.MainApp.maxStructure;
 import static edu.aku.hassannaqvi.tpvicsshrucround2listing.core.MainApp.selectedCluster;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -45,7 +49,7 @@ public class SectionBActivity extends AppCompatActivity {
         setupSkips();
         setSupportActionBar(bi.toolbar);
         db = MainApp.appInfo.dbHelper;
-
+        setGPS();
         maxStructure++;
         MainApp.hhid = 0;
 
@@ -231,5 +235,33 @@ public class SectionBActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "Back Press Not Allowed", Toast.LENGTH_LONG).show();
        /* finish();
         startActivity(new Intent(this, MainActivity.class));*/
+    }
+
+    public void setGPS() {
+        SharedPreferences GPSPref = getSharedPreferences("GPSCoordinates", Context.MODE_PRIVATE);
+        try {
+            String lat = GPSPref.getString("Latitude", "0");
+            String lang = GPSPref.getString("Longitude", "0");
+            String acc = GPSPref.getString("Accuracy", "0");
+
+            if (lat == "0" && lang == "0") {
+                Toast.makeText(this, "Could not obtained points", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Points set", Toast.LENGTH_SHORT).show();
+            }
+
+            String date = DateFormat.format("dd-MM-yyyy HH:mm", Long.parseLong(GPSPref.getString("Time", "0"))).toString();
+
+            listings.setGpsLat(lat);
+            listings.setGpsLng(lang);
+            listings.setGpsAcc(acc);
+            listings.setGpsDT(date); // Timestamp is converted to date above
+
+//            Toast.makeText(this, "GPS set", Toast.LENGTH_SHORT).show();
+
+        } catch (Exception e) {
+            Log.e(TAG, "setGPS: " + e.getMessage());
+        }
+
     }
 }

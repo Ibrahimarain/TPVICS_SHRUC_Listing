@@ -54,7 +54,6 @@ public class SectionAActivity extends AppCompatActivity {
         bi.setListings(listings);
         st = new SimpleDateFormat("HH:mm:ss", Locale.ENGLISH).format(new Date().getTime());
         setupSkips();
-        setGPS();
         setSupportActionBar(bi.toolbar);
 
         populateSpinner();
@@ -308,33 +307,7 @@ public class SectionAActivity extends AppCompatActivity {
 
     }
 
-    public void setGPS() {
-        SharedPreferences GPSPref = getSharedPreferences("GPSCoordinates", Context.MODE_PRIVATE);
-        try {
-            String lat = GPSPref.getString("Latitude", "0");
-            String lang = GPSPref.getString("Longitude", "0");
-            String acc = GPSPref.getString("Accuracy", "0");
 
-            if (lat == "0" && lang == "0") {
-                Toast.makeText(this, "Could not obtained points", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(this, "Points set", Toast.LENGTH_SHORT).show();
-            }
-
-            String date = DateFormat.format("dd-MM-yyyy HH:mm", Long.parseLong(GPSPref.getString("Time", "0"))).toString();
-
-            listings.setGpsLat(lat);
-            listings.setGpsLng(lang);
-            listings.setGpsAcc(acc);
-            listings.setGpsDT(date); // Timestamp is converted to date above
-
-//            Toast.makeText(this, "GPS set", Toast.LENGTH_SHORT).show();
-
-        } catch (Exception e) {
-            Log.e(TAG, "setGPS: " + e.getMessage());
-        }
-
-    }
 
 
 }
