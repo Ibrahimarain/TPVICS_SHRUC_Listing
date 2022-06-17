@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/ibrahim.mushtaque/AndroidStudioProjects/TPVICS_SHRUC_LISTING/app/src/main/res/layout/activity_mwra_listing.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/ibrahim.mushtaque/Documents/GitHub/TPVICS-R2-Linelisting/app/src/main/res/layout/activity_family_listing.xml" value="0.3020833333333333" />
+        <entry key="..\:/Users/ibrahim.mushtaque/Documents/GitHub/TPVICS-R2-Linelisting/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/ibrahim.mushtaque/Documents/GitHub/TPVICS-R2-Linelisting/app/src/main/res/layout/activity_mwra_listing.xml" value="0.34564102564102567" />
+        <entry key="..\:/Users/ibrahim.mushtaque/Documents/GitHub/TPVICS-R2-Linelisting/app/src/main/res/layout/activity_section_a.xml" value="0.36102564102564105" />
+        <entry key="..\:/Users/ibrahim.mushtaque/Documents/GitHub/TPVICS-R2-Linelisting/app/src/main/res/layout/activity_section_b.xml" value="0.36102564102564105" />
+      </map>
+    </option>
+  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" default="true" project-jdk-name="16" project-jdk-type="JavaSDK" />
+</project>
