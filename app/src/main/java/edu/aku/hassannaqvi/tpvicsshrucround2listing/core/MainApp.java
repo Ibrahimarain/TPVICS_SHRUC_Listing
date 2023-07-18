@@ -4,19 +4,24 @@ import static edu.aku.hassannaqvi.tpvicsshrucround2listing.database.CreateTable.
 import static edu.aku.hassannaqvi.tpvicsshrucround2listing.database.DatabaseHelper.DATABASE_PASSWORD;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
+import android.media.AudioManager;
+import android.media.ToneGenerator;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.provider.Settings;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -43,21 +48,22 @@ import edu.aku.hassannaqvi.tpvicsshrucround2listing.models.Cluster;
 import edu.aku.hassannaqvi.tpvicsshrucround2listing.models.Listings;
 import edu.aku.hassannaqvi.tpvicsshrucround2listing.models.Mwra;
 import edu.aku.hassannaqvi.tpvicsshrucround2listing.models.Users;
+import edu.aku.hassannaqvi.tpvicsshrucround2listing.ui.LockActivity;
 
 
 public class MainApp extends Application {
 
-    public static final String PROJECT_NAME = "tpvicsshrucround2listing";
+    public static final String PROJECT_NAME = "tpvicsshrucround3listing";
     public static final String DIST_ID = null;
     public static final String SYNC_LOGIN = "sync_login";
     public static final String _IP = "https://vcoe1.aku.edu";// .LIVE server
     // public static final String _IP = "http://f49461:8080/prosystem";// .TEST server
     //public static final String _IP = "http://43.245.131.159:8080";// .TEST server
-    public static final String _HOST_URL = MainApp._IP + "/tpvics_shruc_r2/api/";// .TEST server;
+    public static final String _HOST_URL = MainApp._IP + "/tpvics_shruc_r3/api/";// .TEST server;
     public static final String _SERVER_URL = "syncGCM.php";
     public static final String _SERVER_GET_URL = "getDataGCM.php";
     public static final String _PHOTO_UPLOAD_URL = _HOST_URL + "uploads.php";
-    public static final String _UPDATE_URL = MainApp._IP + "/tpvics_shruc_r2/app/listing";
+    public static final String _UPDATE_URL = MainApp._IP + "/tpvics_shruc_r3/app/listing";
     public static final String _APP_FOLDER = "../app/listing";
     public static final String _EMPTY_ = "";
     public static final String _USER_URL = "resetpassword.php";
@@ -113,6 +119,8 @@ public class MainApp extends Application {
     public static int HHCount = 0;
     public static String[] clusterInfo;
     public static String selectedTab;
+    static ToneGenerator toneGen1;
+    public static CountDownTimer timer;
 
     private LocationCallback locationCallback;
     LocationRequest mLocationRequest;
@@ -185,6 +193,31 @@ public class MainApp extends Application {
         }
     }
 
+    public static void lockScreen(Context c) {
+        if (timer != null) {
+            timer.cancel();
+        }
+
+        //   Context mContext = c;
+        Activity activity = (Activity) c;
+        timer = new CountDownTimer(15 * 60 * 1000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                //Some code
+                if ((millisUntilFinished / 1000) < 14) {
+                    toneGen1.startTone(ToneGenerator.TONE_CDMA_PIP, 150);
+                }
+            }
+
+            public void onFinish() {
+                Intent intent = new Intent();
+                intent.setClass(c, LockActivity.class);
+                c.startActivity(intent);
+                timer.cancel();
+            }
+        };
+        timer.start();
+    }
+
 
     @Override
     public void onCreate() {
@@ -246,6 +279,7 @@ public class MainApp extends Application {
 //
 //        }
         initSecure();
+        toneGen1 = new ToneGenerator(AudioManager.STREAM_MUSIC, 100);
     }
 
     protected void createLocationRequest() {

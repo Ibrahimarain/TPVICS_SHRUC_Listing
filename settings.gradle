@@ -9,5 +9,5 @@ dependencyResolutionManagement {
         }
     }
 }
-rootProject.name = "TPVICS SHRUC Round2 Listing"
+rootProject.name = "TPVICS SHRUC Round3 Listing"
 include ':app'

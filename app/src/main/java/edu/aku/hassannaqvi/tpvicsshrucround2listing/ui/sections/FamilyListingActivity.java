@@ -170,7 +170,6 @@ public class FamilyListingActivity extends AppCompatActivity {
 
     }
 
-
     public void btnContinue(View view) {
         if (!formValidation()) return;
         //saveDraft();
@@ -230,7 +229,6 @@ public class FamilyListingActivity extends AppCompatActivity {
 
     }
 
-
     public void btnEnd(View view) {
         bi.hh11.setText("Deleted");
         //bi.hh14.setText("Deleted");
@@ -247,7 +245,6 @@ public class FamilyListingActivity extends AppCompatActivity {
 
         } else Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
     }
-
 
     private boolean formValidation() {
         return Validator.emptyCheckingContainer(this, bi.GrpName);
@@ -274,5 +271,11 @@ public class FamilyListingActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "Back Press Not Allowed", Toast.LENGTH_LONG).show();
       /*  finish();
         startActivity(new Intent(this, MainActivity.class));*/
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MainApp.lockScreen(this);
     }
 }

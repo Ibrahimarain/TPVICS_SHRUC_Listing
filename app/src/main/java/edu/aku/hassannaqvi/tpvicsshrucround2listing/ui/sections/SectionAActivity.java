@@ -5,17 +5,12 @@ import static edu.aku.hassannaqvi.tpvicsshrucround2listing.core.MainApp.selected
 import static edu.aku.hassannaqvi.tpvicsshrucround2listing.core.MainApp.selectedTab;
 import static edu.aku.hassannaqvi.tpvicsshrucround2listing.core.MainApp.sharedPref;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -112,7 +107,6 @@ public class SectionAActivity extends AppCompatActivity {
         });
 
     }
-
 
     private void setupSkips() {
     }
@@ -213,7 +207,6 @@ public class SectionAActivity extends AppCompatActivity {
 
     }
 
-
     public void btnEnd(View view) {
         finish();
         startActivity(new Intent(this, MainActivity.class));
@@ -222,7 +215,6 @@ public class SectionAActivity extends AppCompatActivity {
     private boolean formValidation() {
         return Validator.emptyCheckingContainer(this, bi.GrpName);
     }
-
 
     @Override
     public void onBackPressed() {
@@ -307,7 +299,9 @@ public class SectionAActivity extends AppCompatActivity {
 
     }
 
-
-
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MainApp.lockScreen(this);
+    }
 }

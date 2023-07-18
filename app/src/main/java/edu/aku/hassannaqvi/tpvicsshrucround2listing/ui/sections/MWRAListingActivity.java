@@ -91,7 +91,6 @@ public class MWRAListingActivity extends AppCompatActivity {
         return false;
     }
 
-
     public void btnContinue(View view) {
         if (!formValidation()) return;
         saveDraft();
@@ -155,12 +154,10 @@ public class MWRAListingActivity extends AppCompatActivity {
 
     }
 
-
     public void btnEnd(View view) {
         finish();
         startActivity(new Intent(this, MainActivity.class));
     }
-
 
     private boolean formValidation() {
         return Validator.emptyCheckingContainer(this, bi.GrpName);
@@ -171,5 +168,11 @@ public class MWRAListingActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "Back Press Not Allowed", Toast.LENGTH_LONG).show();
 /*        finish();
         startActivity(new Intent(this, MainActivity.class));*/
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MainApp.lockScreen(this);
     }
 }

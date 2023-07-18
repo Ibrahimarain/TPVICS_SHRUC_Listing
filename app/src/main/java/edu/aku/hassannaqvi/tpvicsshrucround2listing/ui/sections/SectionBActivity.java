@@ -114,7 +114,6 @@ public class SectionBActivity extends AppCompatActivity {
         //   bi.hh09.setOnCheckedChangeListener((radioGroup, i) -> Clear.clearAllFields(bi.fldGrpCVhh10));
     }
 
-
     private boolean insertRecord() throws JSONException {
         long rowId = 0;
         MainApp.listings.populateMeta();
@@ -142,7 +141,6 @@ public class SectionBActivity extends AppCompatActivity {
 
         return false;
     }
-
 
     public void btnContinue(View view) {
         if (!formValidation()) return;
@@ -219,12 +217,10 @@ public class SectionBActivity extends AppCompatActivity {
 
     }*/
 
-
     public void btnEnd(View view) {
         finish();
         startActivity(new Intent(this, MainActivity.class));
     }
-
 
     private boolean formValidation() {
         return Validator.emptyCheckingContainer(this, bi.GrpName);
@@ -260,8 +256,14 @@ public class SectionBActivity extends AppCompatActivity {
 //            Toast.makeText(this, "GPS set", Toast.LENGTH_SHORT).show();
 
         } catch (Exception e) {
-            Log.e(TAG, "setGPS: " + e.getMessage());
+            Log.e(TAG, "setPoints: " + e.getMessage());
         }
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MainApp.lockScreen(this);
     }
 }
